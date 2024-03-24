@@ -5,6 +5,7 @@ using UnityEngine;
 public class GridBlock : MonoBehaviour
 {
     public bool isEmpty = true;
+    public bool hasX = false;
 
     [SerializeField] GameObject playerIcon;
     [SerializeField] GameObject playerGameObjectHolder;
@@ -16,6 +17,7 @@ public class GridBlock : MonoBehaviour
             Instantiate(playerIcon, transform.position, transform.rotation, playerGameObjectHolder.transform);
 
             isEmpty = false;
+            hasX = true;
             GridArea.Instance.allGridBlock.Remove(this);
             TurnManager.Instance.ChangeTurn();
         }
