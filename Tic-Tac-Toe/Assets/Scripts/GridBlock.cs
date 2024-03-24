@@ -15,6 +15,7 @@ public class GridBlock : MonoBehaviour
     {
         if (isEmpty && TurnManager.Instance.isPlayerTurn)
         {
+            AudioManager.Instance.PlayClickSound(1f);
             Instantiate(playerIcon, transform.position, transform.rotation, playerGameObjectHolder.transform);
 
             isEmpty = false;

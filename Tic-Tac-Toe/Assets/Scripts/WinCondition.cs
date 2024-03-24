@@ -162,6 +162,7 @@ public class WinCondition : MonoBehaviour
     {
         if (gameWon)
         {
+            AudioManager.Instance.PlayWinSound(0.4f);
             Instantiate(xWonPopUp, xWonPopUp.transform.position, Quaternion.identity);
         }
     }
@@ -170,6 +171,7 @@ public class WinCondition : MonoBehaviour
     {
         if(gameLose)
         {
+            AudioManager.Instance.PlayLoseSound(0.4f);
             Instantiate(oWonPopUp, oWonPopUp.transform.position, Quaternion.identity);
         }
     }

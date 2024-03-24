@@ -13,8 +13,10 @@ public class OpponentAI : MonoBehaviour
 
         if (!TurnManager.Instance.isPlayerTurn)
         {
+            AudioManager.Instance.PlayClickSound(1f);
             int randomGameObject = Random.Range(0, GridArea.Instance.allGridBlock.Count);
-            
+
+
             Instantiate(
                 opponentAIIcon, 
                 GridArea.Instance.allGridBlock[randomGameObject].transform.position, 
