@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 171902643008097391}
   - component: {fileID: 7319038047098815805}
   m_Layer: 0
-  m_Name: X-Won PopUp
+  m_Name: X-WonPopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

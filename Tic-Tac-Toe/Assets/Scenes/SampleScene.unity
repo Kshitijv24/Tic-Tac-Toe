@@ -215,6 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEmpty: 1
   hasX: 0
+  hasO: 0
   playerIcon: {fileID: 489512315059315117, guid: d7269be15a70e644b8dbd753162a627e, type: 3}
   playerGameObjectHolder: {fileID: 850003904}
 --- !u!1 &173767766
@@ -309,6 +310,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEmpty: 1
   hasX: 0
+  hasO: 0
   playerIcon: {fileID: 489512315059315117, guid: d7269be15a70e644b8dbd753162a627e, type: 3}
   playerGameObjectHolder: {fileID: 850003904}
 --- !u!1 &261551139
@@ -503,6 +505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEmpty: 1
   hasX: 0
+  hasO: 0
   playerIcon: {fileID: 489512315059315117, guid: d7269be15a70e644b8dbd753162a627e, type: 3}
   playerGameObjectHolder: {fileID: 850003904}
 --- !u!1 &473209709
@@ -597,6 +600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEmpty: 1
   hasX: 0
+  hasO: 0
   playerIcon: {fileID: 489512315059315117, guid: d7269be15a70e644b8dbd753162a627e, type: 3}
   playerGameObjectHolder: {fileID: 850003904}
 --- !u!1 &519420028
@@ -974,6 +978,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEmpty: 1
   hasX: 0
+  hasO: 0
   playerIcon: {fileID: 489512315059315117, guid: d7269be15a70e644b8dbd753162a627e, type: 3}
   playerGameObjectHolder: {fileID: 850003904}
 --- !u!1 &991082042
@@ -1006,6 +1011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xWonPopUp: {fileID: 5151738357001978083, guid: b2d6bbb019c44884fae4c157cca93d3e, type: 3}
+  oWonPopUp: {fileID: 5331039213143755472, guid: ca63d78d2da1cbd49bc15be5ef86b043, type: 3}
   blockList:
   - {fileID: 1617911307}
   - {fileID: 173767771}
@@ -1123,6 +1129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEmpty: 1
   hasX: 0
+  hasO: 0
   playerIcon: {fileID: 489512315059315117, guid: d7269be15a70e644b8dbd753162a627e, type: 3}
   playerGameObjectHolder: {fileID: 850003904}
 --- !u!1 &1257544428
@@ -1217,6 +1224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEmpty: 1
   hasX: 0
+  hasO: 0
   playerIcon: {fileID: 489512315059315117, guid: d7269be15a70e644b8dbd753162a627e, type: 3}
   playerGameObjectHolder: {fileID: 850003904}
 --- !u!1 &1409370689
@@ -1342,6 +1350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEmpty: 1
   hasX: 0
+  hasO: 0
   playerIcon: {fileID: 489512315059315117, guid: d7269be15a70e644b8dbd753162a627e, type: 3}
   playerGameObjectHolder: {fileID: 850003904}
 --- !u!1 &1617911302
@@ -1436,6 +1445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isEmpty: 1
   hasX: 0
+  hasO: 0
   playerIcon: {fileID: 489512315059315117, guid: d7269be15a70e644b8dbd753162a627e, type: 3}
   playerGameObjectHolder: {fileID: 850003904}
 --- !u!1 &1794713908

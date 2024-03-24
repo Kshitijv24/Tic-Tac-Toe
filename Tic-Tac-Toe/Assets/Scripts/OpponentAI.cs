@@ -21,6 +21,7 @@ public class OpponentAI : MonoBehaviour
                 Quaternion.identity, opponentAIGameObjectHolder.transform);
 
             GridArea.Instance.allGridBlock[randomGameObject].isEmpty = false;
+            GridArea.Instance.allGridBlock[randomGameObject].hasO = true;
             GridArea.Instance.allGridBlock.Remove(GridArea.Instance.allGridBlock[randomGameObject]);
             TurnManager.Instance.ChangeTurn();
         }

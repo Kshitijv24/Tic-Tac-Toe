@@ -6,6 +6,7 @@ public class GridBlock : MonoBehaviour
 {
     public bool isEmpty = true;
     public bool hasX = false;
+    public bool hasO = false;
 
     [SerializeField] GameObject playerIcon;
     [SerializeField] GameObject playerGameObjectHolder;
