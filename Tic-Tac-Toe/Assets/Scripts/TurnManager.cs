@@ -11,6 +11,7 @@ public class TurnManager : MonoBehaviour
     public bool isPlayerTurn = true;
 
     [SerializeField] TextMeshProUGUI turnText;
+    [SerializeField] WinCondition winCondition;
 
     private void Awake()
     {
@@ -28,27 +29,22 @@ public class TurnManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R))
-        {
+        if (Input.GetKeyDown(KeyCode.R))
             SceneManager.LoadScene(0);
-        }
 
         ChangeTurnUI();
     }
 
     public void ChangeTurnUI()
     {
+        if(winCondition.gameWon || winCondition.gameLose)
+            turnText.gameObject.SetActive(false);
+
         if (isPlayerTurn)
-        {
             turnText.text = "Player Turn";
-        }
         else
-        {
             turnText.text = "Opponent AI Turn";
-        }
     }
-    public void ChangeTurn()
-    {
-        isPlayerTurn = !isPlayerTurn;
-    }
+
+    public void ChangeTurn() => isPlayerTurn = !isPlayerTurn;
 }

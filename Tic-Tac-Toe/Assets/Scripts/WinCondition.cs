@@ -1,17 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WinCondition : MonoBehaviour
 {
+    [HideInInspector] public bool gameWon = false;
+    [HideInInspector] public bool gameLose = false;
+
     [SerializeField] GameObject xWonPopUp;
     [SerializeField] GameObject oWonPopUp;
+    [SerializeField] OpponentAI opponentAI;
 
     [SerializeField] List<GridBlock> blockList;
-
-    bool gameWon = false;
-    bool gameLose = false;
 
     private void Update()
     {
@@ -162,6 +162,9 @@ public class WinCondition : MonoBehaviour
     {
         if (gameWon)
         {
+            StopPlayerMovesAfterWinOrLose();
+            StopOpponentAIMovesAfterWinOrLose();
+
             AudioManager.Instance.PlayWinSound(0.4f);
             Instantiate(xWonPopUp, xWonPopUp.transform.position, Quaternion.identity);
         }
@@ -171,8 +174,30 @@ public class WinCondition : MonoBehaviour
     {
         if(gameLose)
         {
+            StopPlayerMovesAfterWinOrLose();
+            StopOpponentAIMovesAfterWinOrLose();
+
             AudioManager.Instance.PlayLoseSound(0.4f);
             Instantiate(oWonPopUp, oWonPopUp.transform.position, Quaternion.identity);
+        }
+    }
+
+    private void StopPlayerMovesAfterWinOrLose()
+    {
+        if (gameWon || gameLose)
+        {
+            foreach (GridBlock gridBlock in GridArea.Instance.allGridBlock)
+            {
+                gridBlock.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    private void StopOpponentAIMovesAfterWinOrLose()
+    {
+        if (gameWon || gameLose)
+        {
+            opponentAI.gameObject.SetActive(false);
         }
     }
 }
