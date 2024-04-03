@@ -1307,7 +1307,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPlayerTurn: 1
   turnText: {fileID: 542040047}
-  winCondition: {fileID: 991082043}
 --- !u!1 &720316263
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,11 +1493,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b8b01109a7f1c6499e316bdc92e316e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameWon: 0
-  gameLose: 0
-  xWonPopUp: {fileID: 5151738357001978083, guid: b2d6bbb019c44884fae4c157cca93d3e, type: 3}
-  oWonPopUp: {fileID: 5331039213143755472, guid: ca63d78d2da1cbd49bc15be5ef86b043, type: 3}
-  opponentAI: {fileID: 261551140}
   blockList:
   - {fileID: 1617911307}
   - {fileID: 173767771}
@@ -1509,6 +1503,11 @@ MonoBehaviour:
   - {fileID: 26455905}
   - {fileID: 462835211}
   - {fileID: 969192703}
+  gameWon: 0
+  gameLose: 0
+  xWonPopUp: {fileID: 5151738357001978083, guid: b2d6bbb019c44884fae4c157cca93d3e, type: 3}
+  oWonPopUp: {fileID: 5331039213143755472, guid: ca63d78d2da1cbd49bc15be5ef86b043, type: 3}
+  opponentAI: {fileID: 261551140}
 --- !u!4 &991082044
 Transform:
   m_ObjectHideFlags: 0
@@ -1631,7 +1630,7 @@ GameObject:
   - component: {fileID: 1257544431}
   - component: {fileID: 1257544433}
   m_Layer: 0
-  m_Name: Middle
+  m_Name: Middle Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

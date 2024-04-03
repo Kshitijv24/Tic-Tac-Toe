@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class WinCondition : MonoBehaviour
 {
+    public static WinCondition Instance { get; private set; }
+
+    public List<GridBlock> blockList;
+
     [HideInInspector] public bool gameWon = false;
     [HideInInspector] public bool gameLose = false;
 
@@ -11,7 +15,19 @@ public class WinCondition : MonoBehaviour
     [SerializeField] GameObject oWonPopUp;
     [SerializeField] OpponentAI opponentAI;
 
-    [SerializeField] List<GridBlock> blockList;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            Debug.Log("There are more than one " + this.GetType() + " Instances", this);
+            return;
+        }
+    }
 
     private void Update()
     {
@@ -186,7 +202,7 @@ public class WinCondition : MonoBehaviour
     {
         if (gameWon || gameLose)
         {
-            foreach (GridBlock gridBlock in GridArea.Instance.allGridBlock)
+            foreach (GridBlock gridBlock in blockList)
             {
                 gridBlock.gameObject.SetActive(false);
             }
