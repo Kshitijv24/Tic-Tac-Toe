@@ -42,65 +42,65 @@ public class WinCondition : MonoBehaviour
 
     private void HandleWinCondition()
     {
-        if (blockList[0].hasX &&
-            blockList[1].hasX &&
-            blockList[2].hasX)
+        if (blockList[0].currentBlockState == BlockState.X &&
+            blockList[1].currentBlockState == BlockState.X &&
+            blockList[2].currentBlockState == BlockState.X)
         {
             gameWon = true;
             ShowWinPopUp();
         }
 
-        else if (blockList[0].hasX &&
-                 blockList[3].hasX &&
-                 blockList[6].hasX)
+        else if (blockList[0].currentBlockState == BlockState.X &&
+                 blockList[3].currentBlockState == BlockState.X &&
+                 blockList[6].currentBlockState == BlockState.X)
         {
             gameWon = true;
             ShowWinPopUp();
         }
 
-        else if (blockList[0].hasX &&
-                 blockList[4].hasX &&
-                 blockList[8].hasX)
+        else if (blockList[0].currentBlockState == BlockState.X &&
+                 blockList[4].currentBlockState == BlockState.X &&
+                 blockList[8].currentBlockState == BlockState.X)
         {
             gameWon = true;
             ShowWinPopUp();
         }
 
-        else if (blockList[1].hasX &&
-                 blockList[4].hasX &&
-                 blockList[7].hasX)
+        else if (blockList[1].currentBlockState == BlockState.X &&
+                 blockList[4].currentBlockState == BlockState.X &&
+                 blockList[7].currentBlockState == BlockState.X)
         {
             gameWon = true;
             ShowWinPopUp();
         }
 
-        else if (blockList[2].hasX &&
-                 blockList[5].hasX &&
-                 blockList[8].hasX)
+        else if (blockList[2].currentBlockState == BlockState.X &&
+                 blockList[5].currentBlockState == BlockState.X &&
+                 blockList[8].currentBlockState == BlockState.X)
         {
             gameWon = true;
             ShowWinPopUp();
         }
 
-        else if (blockList[3].hasX &&
-                 blockList[4].hasX &&
-                 blockList[5].hasX)
+        else if (blockList[3].currentBlockState == BlockState.X &&
+                 blockList[4].currentBlockState == BlockState.X &&
+                 blockList[5].currentBlockState == BlockState.X)
         {
             gameWon = true;
             ShowWinPopUp();
         }
 
-        else if (blockList[6].hasX &&
-                 blockList[7].hasX &&
-                 blockList[8].hasX)
+        else if (blockList[6].currentBlockState == BlockState.X &&
+                 blockList[7].currentBlockState == BlockState.X &&
+                 blockList[8].currentBlockState == BlockState.X)
         {
             gameWon = true;
             ShowWinPopUp();
         }
 
-        else if (blockList[2].hasX &&
-                 blockList[4].hasX &&
-                 blockList[6].hasX)
+        else if (blockList[2].currentBlockState == BlockState.X &&
+                 blockList[4].currentBlockState == BlockState.X &&
+                 blockList[6].currentBlockState == BlockState.X)
         {
             gameWon = true;
             ShowWinPopUp();
@@ -109,65 +109,65 @@ public class WinCondition : MonoBehaviour
 
     private void HandleLoseCondition()
     {
-        if (blockList[0].hasO &&
-            blockList[1].hasO &&
-            blockList[2].hasO)
+        if (blockList[0].currentBlockState == BlockState.O &&
+            blockList[1].currentBlockState == BlockState.O &&
+            blockList[2].currentBlockState == BlockState.O)
         {
             gameLose = true;
             ShowLosePopUp();
         }
 
-        else if (blockList[0].hasO &&
-                 blockList[3].hasO &&
-                 blockList[6].hasO)
+        else if (blockList[0].currentBlockState == BlockState.O &&
+                 blockList[3].currentBlockState == BlockState.O &&
+                 blockList[6].currentBlockState == BlockState.O)
         {
             gameLose = true;
             ShowLosePopUp();
         }
 
-        else if (blockList[0].hasO &&
-                 blockList[4].hasO &&
-                 blockList[8].hasO)
+        else if (blockList[0].currentBlockState == BlockState.O &&
+                 blockList[4].currentBlockState == BlockState.O &&
+                 blockList[8].currentBlockState == BlockState.O)
         {
             gameLose = true;
             ShowLosePopUp();
         }
 
-        else if (blockList[1].hasO &&
-                 blockList[4].hasO &&
-                 blockList[7].hasO)
+        else if (blockList[1].currentBlockState == BlockState.O &&
+                 blockList[4].currentBlockState == BlockState.O &&
+                 blockList[7].currentBlockState == BlockState.O)
         {
             gameLose = true;
             ShowLosePopUp();
         }
 
-        else if (blockList[2].hasO &&
-                 blockList[5].hasO &&
-                 blockList[8].hasO)
+        else if (blockList[2].currentBlockState == BlockState.O &&
+                 blockList[5].currentBlockState == BlockState.O &&
+                 blockList[8].currentBlockState == BlockState.O)
         {
             gameLose = true;
             ShowLosePopUp();
         }
 
-        else if (blockList[3].hasO &&
-                 blockList[4].hasO &&
-                 blockList[5].hasO)
+        else if (blockList[3].currentBlockState == BlockState.O &&
+                 blockList[4].currentBlockState == BlockState.O &&
+                 blockList[5].currentBlockState == BlockState.O)
         {
             gameLose = true;
             ShowLosePopUp();
         }
 
-        else if (blockList[6].hasO &&
-                 blockList[7].hasO &&
-                 blockList[8].hasO)
+        else if (blockList[6].currentBlockState == BlockState.O &&
+                 blockList[7].currentBlockState == BlockState.O &&
+                 blockList[8].currentBlockState == BlockState.O)
         {
             gameLose = true;
             ShowLosePopUp();
         }
 
-        else if (blockList[2].hasO &&
-                 blockList[4].hasO &&
-                 blockList[6].hasO)
+        else if (blockList[2].currentBlockState == BlockState.O &&
+                 blockList[4].currentBlockState == BlockState.O &&
+                 blockList[6].currentBlockState == BlockState.O)
         {
             gameLose = true;
             ShowLosePopUp();

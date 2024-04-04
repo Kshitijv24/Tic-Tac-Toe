@@ -32,16 +32,16 @@ public class OpponentAI : MonoBehaviour
             yield return new WaitForSeconds(1f);
 
             AudioManager.Instance.PlayClickSound(1f);
-            int randomGameObject = Random.Range(0, GridArea.Instance.allGridBlock.Count);
+            int randomIndex = Random.Range(0, GridArea.Instance.allGridBlock.Count);
+            GridBlock randomBlock = GridArea.Instance.allGridBlock[randomIndex];
 
-            GameObject newIcon = Instantiate(
+            Instantiate(
                 opponentAIIcon,
-                GridArea.Instance.allGridBlock[randomGameObject].transform.position,
+                GridArea.Instance.allGridBlock[randomIndex].transform.position,
                 Quaternion.identity, opponentAIGameObjectHolder.transform);
 
-            GridArea.Instance.allGridBlock[randomGameObject].isEmpty = false;
-            GridArea.Instance.allGridBlock[randomGameObject].hasO = true;
-            GridArea.Instance.allGridBlock.Remove(GridArea.Instance.allGridBlock[randomGameObject]);
+            randomBlock.currentBlockState = BlockState.O;
+            GridArea.Instance.allGridBlock.Remove(GridArea.Instance.allGridBlock[randomIndex]);
             TurnManager.Instance.ChangeTurn();
         }
 

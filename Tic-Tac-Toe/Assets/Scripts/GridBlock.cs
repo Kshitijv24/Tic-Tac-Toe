@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class GridBlock : MonoBehaviour
 {
-    public bool isEmpty = true;
-    public bool hasX = false;
-    public bool hasO = false;
+    public BlockState currentBlockState = BlockState.Empty;
 
     [SerializeField] GameObject playerIcon;
     [SerializeField] GameObject playerGameObjectHolder;
 
     private void OnMouseDown()
     {
-        if (isEmpty && TurnManager.Instance.isPlayerTurn)
+        if (currentBlockState == BlockState.Empty && TurnManager.Instance.isPlayerTurn)
         {
             AudioManager.Instance.PlayClickSound(1f);
             Instantiate(playerIcon, transform.position, transform.rotation, playerGameObjectHolder.transform);
 
-            isEmpty = false;
-            hasX = true;
+            currentBlockState = BlockState.X;
             GridArea.Instance.allGridBlock.Remove(this);
             TurnManager.Instance.ChangeTurn();
         }
