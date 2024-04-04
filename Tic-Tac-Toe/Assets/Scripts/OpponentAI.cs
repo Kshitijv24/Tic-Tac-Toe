@@ -37,11 +37,11 @@ public class OpponentAI : MonoBehaviour
 
             Instantiate(
                 opponentAIIcon,
-                GridArea.Instance.allGridBlock[randomIndex].transform.position,
+                randomBlock.transform.position,
                 Quaternion.identity, opponentAIGameObjectHolder.transform);
 
             randomBlock.currentBlockState = BlockState.O;
-            GridArea.Instance.allGridBlock.Remove(GridArea.Instance.allGridBlock[randomIndex]);
+            GridArea.Instance.allGridBlock.Remove(randomBlock);
             TurnManager.Instance.ChangeTurn();
         }
 

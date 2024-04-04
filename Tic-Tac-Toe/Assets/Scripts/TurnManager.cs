@@ -39,15 +39,10 @@ public class TurnManager : MonoBehaviour
         if (WinCondition.Instance.gameWon || WinCondition.Instance.gameLose)
             turnText.gameObject.SetActive(false);
 
-        if (isPlayerTurn)
-            turnText.text = "Player Turn";
-        else
-            turnText.text = "Opponent AI Turn";
+        turnText.text = isPlayerTurn ? "Player Turn" : "Opponent AI Turn";
 
         if (GridArea.Instance.allGridBlock.Count == 0)
-        {
             turnText.text = "It's a draw";
-        }
     }
 
     public void ChangeTurn() => isPlayerTurn = !isPlayerTurn;
