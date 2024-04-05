@@ -213,9 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e428e8494dc0c6a4a8adf65ed1e19297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEmpty: 1
-  hasX: 0
-  hasO: 0
+  currentBlockState: 0
   playerIcon: {fileID: 489512315059315117, guid: d7269be15a70e644b8dbd753162a627e, type: 3}
   playerGameObjectHolder: {fileID: 850003904}
 --- !u!1 &73119587
@@ -376,9 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e428e8494dc0c6a4a8adf65ed1e19297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEmpty: 1
-  hasX: 0
-  hasO: 0
+  currentBlockState: 0
   playerIcon: {fileID: 489512315059315117, guid: d7269be15a70e644b8dbd753162a627e, type: 3}
   playerGameObjectHolder: {fileID: 850003904}
 --- !u!1 &261551139
@@ -818,9 +814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e428e8494dc0c6a4a8adf65ed1e19297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEmpty: 1
-  hasX: 0
-  hasO: 0
+  currentBlockState: 0
   playerIcon: {fileID: 489512315059315117, guid: d7269be15a70e644b8dbd753162a627e, type: 3}
   playerGameObjectHolder: {fileID: 850003904}
 --- !u!1 &473209709
@@ -913,9 +907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e428e8494dc0c6a4a8adf65ed1e19297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEmpty: 1
-  hasX: 0
-  hasO: 0
+  currentBlockState: 0
   playerIcon: {fileID: 489512315059315117, guid: d7269be15a70e644b8dbd753162a627e, type: 3}
   playerGameObjectHolder: {fileID: 850003904}
 --- !u!1 &519420028
@@ -1161,7 +1153,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -241}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 919.6523, y: 250.017}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &542040047
@@ -1459,9 +1451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e428e8494dc0c6a4a8adf65ed1e19297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEmpty: 1
-  hasX: 0
-  hasO: 0
+  currentBlockState: 0
   playerIcon: {fileID: 489512315059315117, guid: d7269be15a70e644b8dbd753162a627e, type: 3}
   playerGameObjectHolder: {fileID: 850003904}
 --- !u!1 &991082042
@@ -1613,9 +1603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e428e8494dc0c6a4a8adf65ed1e19297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEmpty: 1
-  hasX: 0
-  hasO: 0
+  currentBlockState: 0
   playerIcon: {fileID: 489512315059315117, guid: d7269be15a70e644b8dbd753162a627e, type: 3}
   playerGameObjectHolder: {fileID: 850003904}
 --- !u!1 &1257544428
@@ -1708,9 +1696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e428e8494dc0c6a4a8adf65ed1e19297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEmpty: 1
-  hasX: 0
-  hasO: 0
+  currentBlockState: 0
   playerIcon: {fileID: 489512315059315117, guid: d7269be15a70e644b8dbd753162a627e, type: 3}
   playerGameObjectHolder: {fileID: 850003904}
 --- !u!1 &1409370689
@@ -1834,9 +1820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e428e8494dc0c6a4a8adf65ed1e19297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEmpty: 1
-  hasX: 0
-  hasO: 0
+  currentBlockState: 0
   playerIcon: {fileID: 489512315059315117, guid: d7269be15a70e644b8dbd753162a627e, type: 3}
   playerGameObjectHolder: {fileID: 850003904}
 --- !u!1 &1617911302
@@ -1929,9 +1913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e428e8494dc0c6a4a8adf65ed1e19297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEmpty: 1
-  hasX: 0
-  hasO: 0
+  currentBlockState: 0
   playerIcon: {fileID: 489512315059315117, guid: d7269be15a70e644b8dbd753162a627e, type: 3}
   playerGameObjectHolder: {fileID: 850003904}
 --- !u!1 &1794713908

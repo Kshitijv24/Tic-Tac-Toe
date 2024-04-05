@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class WinCondition : MonoBehaviour
@@ -15,12 +16,13 @@ public class WinCondition : MonoBehaviour
     [SerializeField] GameObject oWonPopUp;
     [SerializeField] OpponentAI opponentAI;
 
+    GridBlock[,] myArray = new GridBlock[3, 3];
+    int index = 0;
+
     private void Awake()
     {
         if (Instance == null)
-        {
             Instance = this;
-        }
         else
         {
             Destroy(gameObject);
@@ -29,148 +31,102 @@ public class WinCondition : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        // Assigning data of the list to a 2d Array.
+
+        for (int row = 0; row < myArray.GetLength(0); row++)
+        {
+            for (int col = 0; col < myArray.GetLength(1); col++)
+            {
+                myArray[row, col] = blockList[index];
+                index++;
+            }
+        }
+    }
+
     private void Update()
     {
         if (blockList == null) return;
+        if (gameWon || gameLose) return;
 
-        if (gameWon) return;
-        if (gameLose) return;
-
-        HandleWinCondition();
-        HandleLoseCondition();
+        HandleWinAndLoseCondition();
     }
 
-    private void HandleWinCondition()
+    private void HandleWinAndLoseCondition()
     {
-        if (blockList[0].currentBlockState == BlockState.X &&
-            blockList[1].currentBlockState == BlockState.X &&
-            blockList[2].currentBlockState == BlockState.X)
+        // Checking for the rows win or lose condition
+
+        for (int row = 0; row < 3; row++)
         {
-            gameWon = true;
-            ShowWinPopUp();
+            if (myArray[row, 0].currentBlockState == myArray[row, 1].currentBlockState &&
+                myArray[row, 1].currentBlockState == myArray[row, 2].currentBlockState)
+            {
+                if (myArray[row, 0].currentBlockState == BlockState.X)
+                {
+                    gameWon = true;
+                    ShowWinPopUp();
+                }
+                else if (myArray[row, 0].currentBlockState == BlockState.O)
+                {
+                    gameLose = true;
+                    ShowLosePopUp();
+                }
+            }
         }
 
-        else if (blockList[0].currentBlockState == BlockState.X &&
-                 blockList[3].currentBlockState == BlockState.X &&
-                 blockList[6].currentBlockState == BlockState.X)
+        // Checking for the Columns win or lose condition
+
+        for (int col = 0; col < 3; col++)
         {
-            gameWon = true;
-            ShowWinPopUp();
+            if (myArray[0, col].currentBlockState == myArray[1, col].currentBlockState &&
+                myArray[1, col].currentBlockState == myArray[2, col].currentBlockState)
+            {
+                if (myArray[0, col].currentBlockState == BlockState.X)
+                {
+                    gameWon = true;
+                    ShowWinPopUp();
+                }
+                else if (myArray[0, col].currentBlockState == BlockState.O)
+                {
+                    gameLose = true;
+                    ShowLosePopUp();
+                }
+            }
         }
 
-        else if (blockList[0].currentBlockState == BlockState.X &&
-                 blockList[4].currentBlockState == BlockState.X &&
-                 blockList[8].currentBlockState == BlockState.X)
+        // Checking for Diagonals win or lose condition
+
+        if (myArray[0, 0].currentBlockState == myArray[1, 1].currentBlockState && 
+            myArray[1, 1].currentBlockState == myArray[2, 2].currentBlockState)
         {
-            gameWon = true;
-            ShowWinPopUp();
+            if (myArray[0, 0].currentBlockState == BlockState.X)
+            {
+                gameWon = true;
+                ShowWinPopUp();
+            }
+            else if (myArray[0, 0].currentBlockState == BlockState.O)
+            {
+                gameLose = true;
+                ShowLosePopUp();
+            }
         }
 
-        else if (blockList[1].currentBlockState == BlockState.X &&
-                 blockList[4].currentBlockState == BlockState.X &&
-                 blockList[7].currentBlockState == BlockState.X)
-        {
-            gameWon = true;
-            ShowWinPopUp();
-        }
+        // Checking for Diagonals win or lose condition
 
-        else if (blockList[2].currentBlockState == BlockState.X &&
-                 blockList[5].currentBlockState == BlockState.X &&
-                 blockList[8].currentBlockState == BlockState.X)
+        if (myArray[0, 2].currentBlockState == myArray[1, 1].currentBlockState && 
+            myArray[1, 1].currentBlockState == myArray[2, 0].currentBlockState)
         {
-            gameWon = true;
-            ShowWinPopUp();
-        }
-
-        else if (blockList[3].currentBlockState == BlockState.X &&
-                 blockList[4].currentBlockState == BlockState.X &&
-                 blockList[5].currentBlockState == BlockState.X)
-        {
-            gameWon = true;
-            ShowWinPopUp();
-        }
-
-        else if (blockList[6].currentBlockState == BlockState.X &&
-                 blockList[7].currentBlockState == BlockState.X &&
-                 blockList[8].currentBlockState == BlockState.X)
-        {
-            gameWon = true;
-            ShowWinPopUp();
-        }
-
-        else if (blockList[2].currentBlockState == BlockState.X &&
-                 blockList[4].currentBlockState == BlockState.X &&
-                 blockList[6].currentBlockState == BlockState.X)
-        {
-            gameWon = true;
-            ShowWinPopUp();
-        }
-    }
-
-    private void HandleLoseCondition()
-    {
-        if (blockList[0].currentBlockState == BlockState.O &&
-            blockList[1].currentBlockState == BlockState.O &&
-            blockList[2].currentBlockState == BlockState.O)
-        {
-            gameLose = true;
-            ShowLosePopUp();
-        }
-
-        else if (blockList[0].currentBlockState == BlockState.O &&
-                 blockList[3].currentBlockState == BlockState.O &&
-                 blockList[6].currentBlockState == BlockState.O)
-        {
-            gameLose = true;
-            ShowLosePopUp();
-        }
-
-        else if (blockList[0].currentBlockState == BlockState.O &&
-                 blockList[4].currentBlockState == BlockState.O &&
-                 blockList[8].currentBlockState == BlockState.O)
-        {
-            gameLose = true;
-            ShowLosePopUp();
-        }
-
-        else if (blockList[1].currentBlockState == BlockState.O &&
-                 blockList[4].currentBlockState == BlockState.O &&
-                 blockList[7].currentBlockState == BlockState.O)
-        {
-            gameLose = true;
-            ShowLosePopUp();
-        }
-
-        else if (blockList[2].currentBlockState == BlockState.O &&
-                 blockList[5].currentBlockState == BlockState.O &&
-                 blockList[8].currentBlockState == BlockState.O)
-        {
-            gameLose = true;
-            ShowLosePopUp();
-        }
-
-        else if (blockList[3].currentBlockState == BlockState.O &&
-                 blockList[4].currentBlockState == BlockState.O &&
-                 blockList[5].currentBlockState == BlockState.O)
-        {
-            gameLose = true;
-            ShowLosePopUp();
-        }
-
-        else if (blockList[6].currentBlockState == BlockState.O &&
-                 blockList[7].currentBlockState == BlockState.O &&
-                 blockList[8].currentBlockState == BlockState.O)
-        {
-            gameLose = true;
-            ShowLosePopUp();
-        }
-
-        else if (blockList[2].currentBlockState == BlockState.O &&
-                 blockList[4].currentBlockState == BlockState.O &&
-                 blockList[6].currentBlockState == BlockState.O)
-        {
-            gameLose = true;
-            ShowLosePopUp();
+            if (myArray[0, 2].currentBlockState == BlockState.X)
+            {
+                gameWon = true;
+                ShowWinPopUp();
+            }
+            else if (myArray[0, 2].currentBlockState == BlockState.O)
+            {
+                gameLose = true;
+                ShowLosePopUp();
+            }
         }
     }
 
@@ -203,17 +159,13 @@ public class WinCondition : MonoBehaviour
         if (gameWon || gameLose)
         {
             foreach (GridBlock gridBlock in blockList)
-            {
                 gridBlock.gameObject.SetActive(false);
-            }
         }
     }
 
     private void StopOpponentAIMovesAfterWinOrLose()
     {
         if (gameWon || gameLose)
-        {
             opponentAI.gameObject.SetActive(false);
-        }
     }
 }
