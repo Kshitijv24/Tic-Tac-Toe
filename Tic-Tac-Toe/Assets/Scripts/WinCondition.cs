@@ -16,7 +16,7 @@ public class WinCondition : MonoBehaviour
     [SerializeField] GameObject oWonPopUp;
     [SerializeField] OpponentAI opponentAI;
 
-    GridBlock[,] myArray = new GridBlock[3, 3];
+    GridBlock[,] gridBlockArray = new GridBlock[3, 3];
     int index = 0;
 
     private void Awake()
@@ -33,13 +33,13 @@ public class WinCondition : MonoBehaviour
 
     private void Start()
     {
-        // Assigning data of the list to a 2d Array.
+        // Assigning blockList Data to gridBlockArray
 
-        for (int row = 0; row < myArray.GetLength(0); row++)
+        for (int row = 0; row < gridBlockArray.GetLength(0); row++)
         {
-            for (int col = 0; col < myArray.GetLength(1); col++)
+            for (int col = 0; col < gridBlockArray.GetLength(1); col++)
             {
-                myArray[row, col] = blockList[index];
+                gridBlockArray[row, col] = blockList[index];
                 index++;
             }
         }
@@ -57,17 +57,17 @@ public class WinCondition : MonoBehaviour
     {
         // Checking for the rows win or lose condition
 
-        for (int row = 0; row < 3; row++)
+        for (int row = 0; row < gridBlockArray.GetLength(0); row++)
         {
-            if (myArray[row, 0].currentBlockState == myArray[row, 1].currentBlockState &&
-                myArray[row, 1].currentBlockState == myArray[row, 2].currentBlockState)
+            if (gridBlockArray[row, 0].currentBlockState == gridBlockArray[row, 1].currentBlockState &&
+                gridBlockArray[row, 1].currentBlockState == gridBlockArray[row, 2].currentBlockState)
             {
-                if (myArray[row, 0].currentBlockState == BlockState.X)
+                if (gridBlockArray[row, 0].currentBlockState == BlockState.X)
                 {
                     gameWon = true;
                     ShowWinPopUp();
                 }
-                else if (myArray[row, 0].currentBlockState == BlockState.O)
+                else if (gridBlockArray[row, 0].currentBlockState == BlockState.O)
                 {
                     gameLose = true;
                     ShowLosePopUp();
@@ -77,17 +77,17 @@ public class WinCondition : MonoBehaviour
 
         // Checking for the Columns win or lose condition
 
-        for (int col = 0; col < 3; col++)
+        for (int col = 0; col < gridBlockArray.GetLength(1); col++)
         {
-            if (myArray[0, col].currentBlockState == myArray[1, col].currentBlockState &&
-                myArray[1, col].currentBlockState == myArray[2, col].currentBlockState)
+            if (gridBlockArray[0, col].currentBlockState == gridBlockArray[1, col].currentBlockState &&
+                gridBlockArray[1, col].currentBlockState == gridBlockArray[2, col].currentBlockState)
             {
-                if (myArray[0, col].currentBlockState == BlockState.X)
+                if (gridBlockArray[0, col].currentBlockState == BlockState.X)
                 {
                     gameWon = true;
                     ShowWinPopUp();
                 }
-                else if (myArray[0, col].currentBlockState == BlockState.O)
+                else if (gridBlockArray[0, col].currentBlockState == BlockState.O)
                 {
                     gameLose = true;
                     ShowLosePopUp();
@@ -97,15 +97,15 @@ public class WinCondition : MonoBehaviour
 
         // Checking for Diagonals win or lose condition
 
-        if (myArray[0, 0].currentBlockState == myArray[1, 1].currentBlockState && 
-            myArray[1, 1].currentBlockState == myArray[2, 2].currentBlockState)
+        if (gridBlockArray[0, 0].currentBlockState == gridBlockArray[1, 1].currentBlockState && 
+            gridBlockArray[1, 1].currentBlockState == gridBlockArray[2, 2].currentBlockState)
         {
-            if (myArray[0, 0].currentBlockState == BlockState.X)
+            if (gridBlockArray[0, 0].currentBlockState == BlockState.X)
             {
                 gameWon = true;
                 ShowWinPopUp();
             }
-            else if (myArray[0, 0].currentBlockState == BlockState.O)
+            else if (gridBlockArray[0, 0].currentBlockState == BlockState.O)
             {
                 gameLose = true;
                 ShowLosePopUp();
@@ -114,15 +114,15 @@ public class WinCondition : MonoBehaviour
 
         // Checking for Diagonals win or lose condition
 
-        if (myArray[0, 2].currentBlockState == myArray[1, 1].currentBlockState && 
-            myArray[1, 1].currentBlockState == myArray[2, 0].currentBlockState)
+        if (gridBlockArray[0, 2].currentBlockState == gridBlockArray[1, 1].currentBlockState && 
+            gridBlockArray[1, 1].currentBlockState == gridBlockArray[2, 0].currentBlockState)
         {
-            if (myArray[0, 2].currentBlockState == BlockState.X)
+            if (gridBlockArray[0, 2].currentBlockState == BlockState.X)
             {
                 gameWon = true;
                 ShowWinPopUp();
             }
-            else if (myArray[0, 2].currentBlockState == BlockState.O)
+            else if (gridBlockArray[0, 2].currentBlockState == BlockState.O)
             {
                 gameLose = true;
                 ShowLosePopUp();
