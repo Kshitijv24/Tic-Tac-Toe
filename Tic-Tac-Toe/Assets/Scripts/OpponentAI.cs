@@ -11,7 +11,7 @@ public class OpponentAI : MonoBehaviour
 
     private void Update()
     {
-        if (!isCoroutineRunning)
+        if (!isCoroutineRunning && !TurnManager.Instance.isPlayerTurn)
         {
             StartCoroutine(OpponentAIMove());
         }
@@ -27,23 +27,20 @@ public class OpponentAI : MonoBehaviour
             yield break;
         }
 
-        if (!TurnManager.Instance.isPlayerTurn)
-        {
-            yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f);
 
-            AudioManager.Instance.PlayClickSound(1f);
-            int randomIndex = Random.Range(0, GridArea.Instance.allGridBlock.Count);
-            GridBlock randomBlock = GridArea.Instance.allGridBlock[randomIndex];
+        AudioManager.Instance.PlayClickSound(1f);
+        int randomIndex = Random.Range(0, GridArea.Instance.allGridBlock.Count);
+        GridBlock randomBlock = GridArea.Instance.allGridBlock[randomIndex];
 
-            Instantiate(
-                opponentAIIcon,
-                randomBlock.transform.position,
-                Quaternion.identity, opponentAIGameObjectHolder.transform);
+        Instantiate(
+            opponentAIIcon,
+            randomBlock.transform.position,
+            Quaternion.identity, opponentAIGameObjectHolder.transform);
 
-            randomBlock.currentBlockState = BlockState.O;
-            GridArea.Instance.allGridBlock.Remove(randomBlock);
-            TurnManager.Instance.ChangeTurn();
-        }
+        randomBlock.currentBlockState = BlockState.O;
+        GridArea.Instance.allGridBlock.Remove(randomBlock);
+        TurnManager.Instance.ChangeTurn();
 
         isCoroutineRunning = false;
     }
