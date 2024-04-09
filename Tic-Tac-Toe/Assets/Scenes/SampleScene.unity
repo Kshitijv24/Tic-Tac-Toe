@@ -408,6 +408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   opponentAIIcon: {fileID: 2408435676056113886, guid: c93dce888c1186f47969dff143f25082, type: 3}
   opponentAIGameObjectHolder: {fileID: 1931624815}
+  nextMoveWaitTime: 0.5
 --- !u!4 &261551141
 Transform:
   m_ObjectHideFlags: 0

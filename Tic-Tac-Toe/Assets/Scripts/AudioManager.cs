@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip clickSound;
 
     AudioSource audioSource;
+    bool hasPlayedWinSound = false;
+    bool hasPlayedLoseSound = false;
 
     private void Awake()
     {
@@ -32,7 +34,21 @@ public class AudioManager : MonoBehaviour
 
     public void PlayClickSound(float volumeLevel) => audioSource.PlayOneShot(clickSound, 1f);
 
-    public void PlayWinSound(float volumeLevel) => audioSource.PlayOneShot(winSound, 0.4f);
+    public void PlayWinSound(float volumeLevel)
+    {
+        if (!hasPlayedWinSound)
+        {
+            audioSource.PlayOneShot(winSound, 0.4f);
+            hasPlayedWinSound = true;
+        }
+    }
 
-    public void PlayLoseSound(float volumeLevel) => audioSource.PlayOneShot(loseSound, 0.4f);
+    public void PlayLoseSound(float volumeLevel)
+    {
+        if (!hasPlayedLoseSound)
+        {
+            audioSource.PlayOneShot(loseSound, 0.4f);
+            hasPlayedLoseSound = true;
+        }
+    }
 }

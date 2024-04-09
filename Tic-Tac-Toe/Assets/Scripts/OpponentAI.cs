@@ -6,6 +6,7 @@ public class OpponentAI : MonoBehaviour
 {
     [SerializeField] GameObject opponentAIIcon;
     [SerializeField] GameObject opponentAIGameObjectHolder;
+    [SerializeField] float nextMoveWaitTime = 0.1f;
 
     private bool isCoroutineRunning = false;
 
@@ -27,7 +28,7 @@ public class OpponentAI : MonoBehaviour
             yield break;
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(nextMoveWaitTime);
 
         AudioManager.Instance.PlayClickSound(1f);
         int randomIndex = Random.Range(0, GridArea.Instance.allGridBlock.Count);
