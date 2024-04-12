@@ -6,7 +6,7 @@ public class OpponentAI : MonoBehaviour
 {
     [SerializeField] GameObject opponentAIIcon;
     [SerializeField] GameObject opponentAIGameObjectHolder;
-    [SerializeField] float nextMoveWaitTime = 0.1f;
+    [SerializeField] float nextMoveWaitTime = 0.5f;
 
     private bool isCoroutineRunning = false;
 

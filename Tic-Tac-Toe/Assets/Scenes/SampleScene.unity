@@ -387,6 +387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 261551141}
   - component: {fileID: 261551140}
+  - component: {fileID: 261551142}
   m_Layer: 0
   m_Name: OpponentAI
   m_TagString: Untagged
@@ -401,7 +402,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261551139}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a1f8e3e8b0d84fd4b975c4a040e80f29, type: 3}
   m_Name: 
@@ -422,8 +423,23 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &261551142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261551139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adae9d2cfd3c38e4c88cae8d79ae0d35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opponentAIIcon: {fileID: 2408435676056113886, guid: c93dce888c1186f47969dff143f25082, type: 3}
+  opponentAIGameObjectHolder: {fileID: 1931624815}
+  nextMoveWaitTime: 0.5
 --- !u!1 &277111451
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,7 +492,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &287592375
 GameObject:
@@ -1512,7 +1528,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1249786094
 GameObject:

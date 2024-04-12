@@ -11,12 +11,12 @@ public class WinCondition : MonoBehaviour
 
     [HideInInspector] public bool gameWon = false;
     [HideInInspector] public bool gameLose = false;
+    [HideInInspector] public GridBlock[,] board = new GridBlock[3, 3];
 
     [SerializeField] GameObject xWonPopUp;
     [SerializeField] GameObject oWonPopUp;
     [SerializeField] OpponentAI opponentAI;
 
-    GridBlock[,] gridBlockArray = new GridBlock[3, 3];
     int index = 0;
 
     private void Awake()
@@ -35,11 +35,11 @@ public class WinCondition : MonoBehaviour
     {
         // Assigning blockList Data to gridBlockArray
 
-        for (int row = 0; row < gridBlockArray.GetLength(0); row++)
+        for (int row = 0; row < board.GetLength(0); row++)
         {
-            for (int col = 0; col < gridBlockArray.GetLength(1); col++)
+            for (int col = 0; col < board.GetLength(1); col++)
             {
-                gridBlockArray[row, col] = blockList[index];
+                board[row, col] = blockList[index];
                 index++;
             }
         }
@@ -53,81 +53,90 @@ public class WinCondition : MonoBehaviour
         HandleWinAndLoseCondition();
     }
 
-    private void HandleWinAndLoseCondition()
+    public void HandleWinAndLoseCondition()
     {
         // Checking for the rows win or lose condition
 
-        for (int row = 0; row < gridBlockArray.GetLength(0); row++)
+        for (int row = 0; row < board.GetLength(0); row++)
         {
-            if (gridBlockArray[row, 0].currentBlockState == gridBlockArray[row, 1].currentBlockState &&
-                gridBlockArray[row, 1].currentBlockState == gridBlockArray[row, 2].currentBlockState)
+            if (board[row, 0].currentBlockState == board[row, 1].currentBlockState &&
+                board[row, 1].currentBlockState == board[row, 2].currentBlockState)
             {
-                if (gridBlockArray[row, 0].currentBlockState == BlockState.X)
+                if (board[row, 0].currentBlockState == BlockState.X)
                 {
                     gameWon = true;
                     ShowWinPopUp();
+                    //return +10;
                 }
-                else if (gridBlockArray[row, 0].currentBlockState == BlockState.O)
+                else if (board[row, 0].currentBlockState == BlockState.O)
                 {
                     gameLose = true;
                     ShowLosePopUp();
+                    //return -10;
                 }
             }
         }
 
         // Checking for the Columns win or lose condition
 
-        for (int col = 0; col < gridBlockArray.GetLength(1); col++)
+        for (int col = 0; col < board.GetLength(1); col++)
         {
-            if (gridBlockArray[0, col].currentBlockState == gridBlockArray[1, col].currentBlockState &&
-                gridBlockArray[1, col].currentBlockState == gridBlockArray[2, col].currentBlockState)
+            if (board[0, col].currentBlockState == board[1, col].currentBlockState &&
+                board[1, col].currentBlockState == board[2, col].currentBlockState)
             {
-                if (gridBlockArray[0, col].currentBlockState == BlockState.X)
+                if (board[0, col].currentBlockState == BlockState.X)
                 {
                     gameWon = true;
                     ShowWinPopUp();
+                    //return +10;
                 }
-                else if (gridBlockArray[0, col].currentBlockState == BlockState.O)
+                else if (board[0, col].currentBlockState == BlockState.O)
                 {
                     gameLose = true;
                     ShowLosePopUp();
+                    //return -10;
                 }
             }
         }
 
         // Checking for Diagonals win or lose condition
 
-        if (gridBlockArray[0, 0].currentBlockState == gridBlockArray[1, 1].currentBlockState && 
-            gridBlockArray[1, 1].currentBlockState == gridBlockArray[2, 2].currentBlockState)
+        if (board[0, 0].currentBlockState == board[1, 1].currentBlockState && 
+            board[1, 1].currentBlockState == board[2, 2].currentBlockState)
         {
-            if (gridBlockArray[0, 0].currentBlockState == BlockState.X)
+            if (board[0, 0].currentBlockState == BlockState.X)
             {
                 gameWon = true;
                 ShowWinPopUp();
+                //return +10;
             }
-            else if (gridBlockArray[0, 0].currentBlockState == BlockState.O)
+            else if (board[0, 0].currentBlockState == BlockState.O)
             {
                 gameLose = true;
                 ShowLosePopUp();
+                //return -10;
             }
         }
 
         // Checking for Diagonals win or lose condition
 
-        if (gridBlockArray[0, 2].currentBlockState == gridBlockArray[1, 1].currentBlockState && 
-            gridBlockArray[1, 1].currentBlockState == gridBlockArray[2, 0].currentBlockState)
+        if (board[0, 2].currentBlockState == board[1, 1].currentBlockState && 
+            board[1, 1].currentBlockState == board[2, 0].currentBlockState)
         {
-            if (gridBlockArray[0, 2].currentBlockState == BlockState.X)
+            if (board[0, 2].currentBlockState == BlockState.X)
             {
                 gameWon = true;
                 ShowWinPopUp();
+                //return +10;
             }
-            else if (gridBlockArray[0, 2].currentBlockState == BlockState.O)
+            else if (board[0, 2].currentBlockState == BlockState.O)
             {
                 gameLose = true;
                 ShowLosePopUp();
+                //return -10;
             }
         }
+        //return 0;
     }
 
     private void ShowWinPopUp()
