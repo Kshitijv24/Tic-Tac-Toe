@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class AdvancedOpponentAI : MonoBehaviour
 {
@@ -23,7 +21,7 @@ public class AdvancedOpponentAI : MonoBehaviour
         {
             for (int col = 0; col < board.GetLength(1); col++)
             {
-                board[row, col] = WinCondition.Instance.blockList[index];
+                board[row, col] = GridArea.Instance.gridBlockList[index];
                 index++;
             }
         }
@@ -41,7 +39,7 @@ public class AdvancedOpponentAI : MonoBehaviour
     {
         isCoroutineRunning = true;
 
-        if (GridArea.Instance.allGridBlock.Count <= 0)
+        if (GridArea.Instance.gridBlockList.Count <= 0)
         {
             isCoroutineRunning = false;
             yield break;
@@ -49,15 +47,15 @@ public class AdvancedOpponentAI : MonoBehaviour
 
         yield return new WaitForSeconds(nextMoveWaitTime);
 
+        FindBestMove();
         AudioManager.Instance.PlayClickSound(1f);
-        BestMove();
 
         isCoroutineRunning = false;
     }
 
-    private void BestMove()
+    private void FindBestMove()
     {
-        float bestScore = Mathf.NegativeInfinity;
+        int bestScore = int.MinValue;
         GridBlock move = null;
 
         for (int i = 0; i < 3; i++)
@@ -66,8 +64,8 @@ public class AdvancedOpponentAI : MonoBehaviour
             {
                 if (board[i, j].currentBlockState == BlockState.Empty)
                 {
-                    board[i, j].currentBlockState = BlockState.O;
-                    float score = CodingTrainMiniMax(board, 0, false);
+                    board[i, j].currentBlockState = BlockState.X;
+                    int score = MiniMax(board, 0, false);
                     board[i, j].currentBlockState = BlockState.Empty;
 
                     if (score > bestScore)
@@ -79,34 +77,32 @@ public class AdvancedOpponentAI : MonoBehaviour
             }
         }
 
-        Debug.Log(bestScore);
-
         Instantiate(
             opponentAIIcon,
             move.transform.position,
             Quaternion.identity, opponentAIGameObjectHolder.transform);
 
         move.currentBlockState = BlockState.O;
-        GridArea.Instance.allGridBlock.Remove(move);
+        GridArea.Instance.gridBlockList.Remove(move);
         TurnManager.Instance.ChangeTurn();
     }
 
-    private float CodingTrainMiniMax(GridBlock[,] board, int depth, bool isMaximizing)
+    private int MiniMax(GridBlock[,] board, int depth, bool isMaximizing)
     {
-        //float score = WinCondition.Instance.HandleWinAndLoseCondition();
-        float score;
-        //if (score == 10)
-        //    return score;
+        int score = WinCondition.Instance.HandleWinAndLoseCondition();
 
-        //if (score == -10)
-        //    return score;
+        if (score == 10)
+            return score;
 
-        //if (!isMovesLeft(board))
-        //    return 0;
+        if (score == -10)
+            return score;
+
+        if (!isMovesLeft(board))
+            return 0;
 
         if (isMaximizing)
         {
-            float bestScore = Mathf.NegativeInfinity;
+            int bestScore = int.MinValue;
 
             for (int i = 0; i < 3; i++)
             {
@@ -114,10 +110,10 @@ public class AdvancedOpponentAI : MonoBehaviour
                 {
                     if (board[i,j].currentBlockState == BlockState.Empty)
                     {
-                        board[i,j].currentBlockState = BlockState.O;
-                        score = CodingTrainMiniMax(board, depth + 1, false);
+                        board[i,j].currentBlockState = BlockState.X;
+                        score = MiniMax(board, depth + 1, !isMaximizing);
                         board[i, j].currentBlockState = BlockState.Empty;
-                        bestScore = MathF.Max(score, bestScore);
+                        bestScore = (int)MathF.Max(score, bestScore);
                     }
                 }
             }
@@ -125,7 +121,7 @@ public class AdvancedOpponentAI : MonoBehaviour
         }
         else
         {
-            float bestScore = Mathf.Infinity;
+            int bestScore = int.MaxValue;
 
             for (int i = 0; i < 3; i++)
             {
@@ -133,10 +129,10 @@ public class AdvancedOpponentAI : MonoBehaviour
                 {
                     if (board[i, j].currentBlockState == BlockState.Empty)
                     {
-                        board[i, j].currentBlockState = BlockState.X;
-                        score = CodingTrainMiniMax(board, depth + 1, true);
+                        board[i, j].currentBlockState = BlockState.O;
+                        score = MiniMax(board, depth + 1, isMaximizing);
                         board[i, j].currentBlockState = BlockState.Empty;
-                        bestScore = MathF.Min(score, bestScore);
+                        bestScore = (int)MathF.Min(score, bestScore);
                     }
                 }
             }
@@ -152,94 +148,4 @@ public class AdvancedOpponentAI : MonoBehaviour
                     return true;
         return false;
     }
-
-    //private float MiniMax(GridBlock[,] board, int depth, bool isMax)
-    //{
-    //    Debug.Log("MinMax Run");
-    //    float score = WinCondition.Instance.HandleWinAndLoseCondition();
-
-    //    if (score == 10)
-    //        return score;
-
-    //    if (score == -10)
-    //        return score;
-
-    //    if (!isMovesLeft(board))
-    //        return 0;
-
-    //    if (isMax)
-    //    {
-    //        float bestScore = Mathf.NegativeInfinity;
-
-    //        for (int i = 0; i < 3; i++)
-    //        {
-    //            for (int j = 0; j < 3; j++)
-    //            {
-    //                if (board[i, j].currentBlockState == BlockState.Empty)
-    //                {
-    //                    board[i, j].currentBlockState = BlockState.X;
-
-    //                    score = MiniMax(board, depth + 1, isMax);
-
-    //                    board[i, j].currentBlockState = BlockState.Empty;
-
-    //                    bestScore = Mathf.Max(score, bestScore);
-    //                }
-    //            }
-    //        }
-    //        return bestScore;
-    //    }
-    //    else
-    //    {
-    //        float bestScore = Mathf.Infinity;
-
-    //        for (int i = 0; i < 3; i++)
-    //        {
-    //            for (int j = 0; j < 3; j++)
-    //            {
-    //                if (board[i, j].currentBlockState == BlockState.Empty)
-    //                {
-    //                    board[i, j].currentBlockState = BlockState.O;
-
-    //                    score = MiniMax(board, depth + 1, !isMax);
-
-    //                    board[i, j].currentBlockState = BlockState.Empty;
-
-    //                    bestScore = Mathf.Min(score, bestScore);
-    //                }
-    //            }
-    //        }
-    //        return bestScore;
-    //    }
-    //}
-
-    //private GridBlock FindBestMove(GridBlock[,] board)
-    //{
-    //    float bestVal = Mathf.NegativeInfinity;
-    //    GridBlock bestMove = null;
-    //    bestMove.currentBlockState = BlockState.O;
-
-    //    for (int i = 0; i < 3; i++)
-    //    {
-    //        for (int j = 0; j < 3; j++)
-    //        {
-    //            if (board[i,j].currentBlockState == BlockState.Empty)
-    //            {
-    //                board[i, j].currentBlockState = BlockState.X;
-
-    //                float moveVal = MiniMax(board, 0, false);
-
-    //                board[i, j].currentBlockState = BlockState.Empty;
-
-    //                if(moveVal > bestVal)
-    //                {
-    //                    bestMove = board[i, j];
-    //                    bestVal = moveVal;
-    //                }
-    //            }
-    //        }
-    //    }
-
-    //    return bestMove;
-    //}
 }

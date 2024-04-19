@@ -17,7 +17,7 @@ public class GridBlock : MonoBehaviour
             Instantiate(playerIcon, transform.position, transform.rotation, playerGameObjectHolder.transform);
 
             currentBlockState = BlockState.X;
-            GridArea.Instance.allGridBlock.Remove(this);
+            GridArea.Instance.gridBlockList.Remove(this);
             TurnManager.Instance.ChangeTurn();
         }
     }

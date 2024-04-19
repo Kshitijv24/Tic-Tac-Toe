@@ -41,7 +41,7 @@ public class TurnManager : MonoBehaviour
 
         turnText.text = isPlayerTurn ? "Player Turn" : "Opponent AI Turn";
 
-        if (GridArea.Instance.allGridBlock.Count == 0)
+        if (GridArea.Instance.gridBlockList.Count == 0)
             turnText.text = "It's a draw";
     }
 

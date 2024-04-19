@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 
 public class WinCondition : MonoBehaviour
@@ -12,10 +11,6 @@ public class WinCondition : MonoBehaviour
     [HideInInspector] public bool gameWon = false;
     [HideInInspector] public bool gameLose = false;
     [HideInInspector] public GridBlock[,] board = new GridBlock[3, 3];
-
-    [SerializeField] GameObject xWonPopUp;
-    [SerializeField] GameObject oWonPopUp;
-    [SerializeField] OpponentAI opponentAI;
 
     int index = 0;
 
@@ -53,128 +48,84 @@ public class WinCondition : MonoBehaviour
         HandleWinAndLoseCondition();
     }
 
-    public void HandleWinAndLoseCondition()
+    public int HandleWinAndLoseCondition()
     {
-        // Checking for the rows win or lose condition
+        int score = 0;
 
-        for (int row = 0; row < board.GetLength(0); row++)
+        // Check for horizontal and vertical win/lose conditions
+        for (int i = 0; i < 3; i++)
         {
-            if (board[row, 0].currentBlockState == board[row, 1].currentBlockState &&
-                board[row, 1].currentBlockState == board[row, 2].currentBlockState)
+            if (CheckLine(board[i, 0], board[i, 1], board[i, 2]))
             {
-                if (board[row, 0].currentBlockState == BlockState.X)
+                if (board[i, 0].currentBlockState == BlockState.X)
                 {
                     gameWon = true;
-                    ShowWinPopUp();
-                    //return +10;
+                    //Debug.Log("Player won");
+                    score = 10;
                 }
-                else if (board[row, 0].currentBlockState == BlockState.O)
+                else if (board[i, 0].currentBlockState == BlockState.O)
                 {
                     gameLose = true;
-                    ShowLosePopUp();
-                    //return -10;
+                    //Debug.Log("Opponent AI won");
+                    score = -10;
+                }
+            }
+
+            if (CheckLine(board[0, i], board[1, i], board[2, i]))
+            {
+                if (board[0, i].currentBlockState == BlockState.X)
+                {
+                    gameWon = true;
+                    //Debug.Log("Player won");
+                    score = 10;
+                }
+                else if (board[0, i].currentBlockState == BlockState.O)
+                {
+                    gameLose = true;
+                    //Debug.Log("Opponent AI won");
+                    score = -10;
                 }
             }
         }
 
-        // Checking for the Columns win or lose condition
-
-        for (int col = 0; col < board.GetLength(1); col++)
-        {
-            if (board[0, col].currentBlockState == board[1, col].currentBlockState &&
-                board[1, col].currentBlockState == board[2, col].currentBlockState)
-            {
-                if (board[0, col].currentBlockState == BlockState.X)
-                {
-                    gameWon = true;
-                    ShowWinPopUp();
-                    //return +10;
-                }
-                else if (board[0, col].currentBlockState == BlockState.O)
-                {
-                    gameLose = true;
-                    ShowLosePopUp();
-                    //return -10;
-                }
-            }
-        }
-
-        // Checking for Diagonals win or lose condition
-
-        if (board[0, 0].currentBlockState == board[1, 1].currentBlockState && 
-            board[1, 1].currentBlockState == board[2, 2].currentBlockState)
+        // Check for diagonal win/lose conditions
+        if (CheckLine(board[0, 0], board[1, 1], board[2, 2]))
         {
             if (board[0, 0].currentBlockState == BlockState.X)
             {
                 gameWon = true;
-                ShowWinPopUp();
-                //return +10;
+                //Debug.Log("Player won");
+                score = 10;
             }
             else if (board[0, 0].currentBlockState == BlockState.O)
             {
                 gameLose = true;
-                ShowLosePopUp();
-                //return -10;
+                //Debug.Log("Opponent AI won");
+                score = -10;
             }
         }
 
-        // Checking for Diagonals win or lose condition
-
-        if (board[0, 2].currentBlockState == board[1, 1].currentBlockState && 
-            board[1, 1].currentBlockState == board[2, 0].currentBlockState)
+        if (CheckLine(board[0, 2], board[1, 1], board[2, 0]))
         {
             if (board[0, 2].currentBlockState == BlockState.X)
             {
                 gameWon = true;
-                ShowWinPopUp();
-                //return +10;
+                //Debug.Log("Player won");
+                score = 10;
             }
             else if (board[0, 2].currentBlockState == BlockState.O)
             {
                 gameLose = true;
-                ShowLosePopUp();
-                //return -10;
+                //Debug.Log("Opponent AI won");
+                score = -10;
             }
         }
-        //return 0;
+
+        return score;
     }
 
-    private void ShowWinPopUp()
+    private bool CheckLine(GridBlock a, GridBlock b, GridBlock c)
     {
-        if (gameWon)
-        {
-            StopPlayerMovesAfterWinOrLose();
-            StopOpponentAIMovesAfterWinOrLose();
-
-            AudioManager.Instance.PlayWinSound(0.4f);
-            Instantiate(xWonPopUp, xWonPopUp.transform.position, Quaternion.identity);
-        }
-    }
-
-    private void ShowLosePopUp()
-    {
-        if(gameLose)
-        {
-            StopPlayerMovesAfterWinOrLose();
-            StopOpponentAIMovesAfterWinOrLose();
-
-            AudioManager.Instance.PlayLoseSound(0.4f);
-            Instantiate(oWonPopUp, oWonPopUp.transform.position, Quaternion.identity);
-        }
-    }
-
-    private void StopPlayerMovesAfterWinOrLose()
-    {
-        if (gameWon || gameLose)
-        {
-            foreach (GridBlock gridBlock in blockList)
-                gridBlock.gameObject.SetActive(false);
-        }
-    }
-
-    private void StopOpponentAIMovesAfterWinOrLose()
-    {
-        if (gameWon || gameLose)
-            opponentAI.gameObject.SetActive(false);
+        return a.currentBlockState != BlockState.Empty && a.currentBlockState == b.currentBlockState && b.currentBlockState == c.currentBlockState;
     }
 }

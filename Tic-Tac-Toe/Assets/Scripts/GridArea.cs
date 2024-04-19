@@ -6,7 +6,7 @@ public class GridArea : MonoBehaviour
 {
     public static GridArea Instance { get; private set; }
 
-    public List<GridBlock> allGridBlock;
+    public List<GridBlock> gridBlockList;
 
     private void Awake()
     {

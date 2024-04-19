@@ -440,6 +440,16 @@ MonoBehaviour:
   opponentAIIcon: {fileID: 2408435676056113886, guid: c93dce888c1186f47969dff143f25082, type: 3}
   opponentAIGameObjectHolder: {fileID: 1931624815}
   nextMoveWaitTime: 0.5
+  blockList:
+  - {fileID: 1617911307}
+  - {fileID: 173767771}
+  - {fileID: 473209714}
+  - {fileID: 1442920004}
+  - {fileID: 1257544433}
+  - {fileID: 1249786099}
+  - {fileID: 26455905}
+  - {fileID: 462835211}
+  - {fileID: 969192703}
 --- !u!1 &277111451
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc55e98ce0e2a6f4686707292689716e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allGridBlock:
+  gridBlockList:
   - {fileID: 1617911307}
   - {fileID: 173767771}
   - {fileID: 473209714}
@@ -1512,9 +1522,6 @@ MonoBehaviour:
   - {fileID: 969192703}
   gameWon: 0
   gameLose: 0
-  xWonPopUp: {fileID: 5151738357001978083, guid: b2d6bbb019c44884fae4c157cca93d3e, type: 3}
-  oWonPopUp: {fileID: 5331039213143755472, guid: ca63d78d2da1cbd49bc15be5ef86b043, type: 3}
-  opponentAI: {fileID: 261551140}
 --- !u!4 &991082044
 Transform:
   m_ObjectHideFlags: 0

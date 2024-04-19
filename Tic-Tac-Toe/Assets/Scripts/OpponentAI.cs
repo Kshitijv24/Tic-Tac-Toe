@@ -22,7 +22,7 @@ public class OpponentAI : MonoBehaviour
     {
         isCoroutineRunning = true;
 
-        if (GridArea.Instance.allGridBlock.Count <= 0)
+        if (GridArea.Instance.gridBlockList.Count <= 0)
         {
             isCoroutineRunning = false;
             yield break;
@@ -31,8 +31,8 @@ public class OpponentAI : MonoBehaviour
         yield return new WaitForSeconds(nextMoveWaitTime);
 
         AudioManager.Instance.PlayClickSound(1f);
-        int randomIndex = Random.Range(0, GridArea.Instance.allGridBlock.Count);
-        GridBlock randomBlock = GridArea.Instance.allGridBlock[randomIndex];
+        int randomIndex = Random.Range(0, GridArea.Instance.gridBlockList.Count);
+        GridBlock randomBlock = GridArea.Instance.gridBlockList[randomIndex];
 
         Instantiate(
             opponentAIIcon,
@@ -40,7 +40,7 @@ public class OpponentAI : MonoBehaviour
             Quaternion.identity, opponentAIGameObjectHolder.transform);
 
         randomBlock.currentBlockState = BlockState.O;
-        GridArea.Instance.allGridBlock.Remove(randomBlock);
+        GridArea.Instance.gridBlockList.Remove(randomBlock);
         TurnManager.Instance.ChangeTurn();
 
         isCoroutineRunning = false;
