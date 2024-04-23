@@ -89,7 +89,7 @@ public class AdvancedOpponentAI : MonoBehaviour
 
     private int MiniMax(GridBlock[,] board, int depth, bool isMaximizing)
     {
-        int score = WinCondition.Instance.HandleWinAndLoseCondition();
+        int score = WinCondition.Instance.HandleWinAndLoseCondition(board);
 
         if (score == 10)
             return score;

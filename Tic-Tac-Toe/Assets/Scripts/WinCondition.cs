@@ -45,10 +45,10 @@ public class WinCondition : MonoBehaviour
         if (blockList == null) return;
         if (gameWon || gameLose) return;
 
-        HandleWinAndLoseCondition();
+        //HandleWinAndLoseCondition();
     }
 
-    public int HandleWinAndLoseCondition()
+    public int HandleWinAndLoseCondition(GridBlock[,] board)
     {
         int score = 0;
 
@@ -59,13 +59,13 @@ public class WinCondition : MonoBehaviour
             {
                 if (board[i, 0].currentBlockState == BlockState.X)
                 {
-                    gameWon = true;
+                    //gameWon = true;
                     //Debug.Log("Player won");
                     score = 10;
                 }
                 else if (board[i, 0].currentBlockState == BlockState.O)
                 {
-                    gameLose = true;
+                    //gameLose = true;
                     //Debug.Log("Opponent AI won");
                     score = -10;
                 }
@@ -75,13 +75,13 @@ public class WinCondition : MonoBehaviour
             {
                 if (board[0, i].currentBlockState == BlockState.X)
                 {
-                    gameWon = true;
+                    //gameWon = true;
                     //Debug.Log("Player won");
                     score = 10;
                 }
                 else if (board[0, i].currentBlockState == BlockState.O)
                 {
-                    gameLose = true;
+                    //gameLose = true;
                     //Debug.Log("Opponent AI won");
                     score = -10;
                 }
@@ -93,13 +93,13 @@ public class WinCondition : MonoBehaviour
         {
             if (board[0, 0].currentBlockState == BlockState.X)
             {
-                gameWon = true;
+                //gameWon = true;
                 //Debug.Log("Player won");
                 score = 10;
             }
             else if (board[0, 0].currentBlockState == BlockState.O)
             {
-                gameLose = true;
+                //gameLose = true;
                 //Debug.Log("Opponent AI won");
                 score = -10;
             }
@@ -109,13 +109,13 @@ public class WinCondition : MonoBehaviour
         {
             if (board[0, 2].currentBlockState == BlockState.X)
             {
-                gameWon = true;
+                //gameWon = true;
                 //Debug.Log("Player won");
                 score = 10;
             }
             else if (board[0, 2].currentBlockState == BlockState.O)
             {
-                gameLose = true;
+                //gameLose = true;
                 //Debug.Log("Opponent AI won");
                 score = -10;
             }
