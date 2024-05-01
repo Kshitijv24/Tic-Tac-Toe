@@ -1527,6 +1527,9 @@ MonoBehaviour:
   - {fileID: 26455905}
   - {fileID: 462835211}
   - {fileID: 969192703}
+  xWonPopUp: {fileID: 5151738357001978083, guid: b2d6bbb019c44884fae4c157cca93d3e, type: 3}
+  oWonPopUp: {fileID: 5331039213143755472, guid: ca63d78d2da1cbd49bc15be5ef86b043, type: 3}
+  advancedOpponentAI: {fileID: 261551142}
   gameWon: 0
   gameLose: 0
 --- !u!4 &991082044

@@ -8,6 +8,10 @@ public class WinCondition : MonoBehaviour
 
     public List<GridBlock> blockList;
 
+    [SerializeField] GameObject xWonPopUp;
+    [SerializeField] GameObject oWonPopUp;
+    [SerializeField] AdvancedOpponentAI advancedOpponentAI;
+
     [HideInInspector] public bool gameWon = false;
     [HideInInspector] public bool gameLose = false;
     [HideInInspector] public GridBlock[,] board = new GridBlock[3, 3];
@@ -58,12 +62,12 @@ public class WinCondition : MonoBehaviour
                 if (board[row, 0].currentBlockState == BlockState.X)
                 {
                     gameWon = true;
-                    Debug.Log("Player won");
+                    ShowWinOrLosePopUp();
                 }
                 else if (board[row, 0].currentBlockState == BlockState.O)
                 {
                     gameLose = true;
-                    Debug.Log("Opponent AI won");
+                    ShowWinOrLosePopUp();
                 }
             }
         }
@@ -77,12 +81,12 @@ public class WinCondition : MonoBehaviour
                 if (board[0, col].currentBlockState == BlockState.X)
                 {
                     gameWon = true;
-                    Debug.Log("Player won");
+                    ShowWinOrLosePopUp();
                 }
                 else if (board[0, col].currentBlockState == BlockState.O)
                 {
                     gameLose = true;
-                    Debug.Log("Opponent AI won");
+                    ShowWinOrLosePopUp();
                 }
             }
         }
@@ -93,12 +97,12 @@ public class WinCondition : MonoBehaviour
             if (board[0, 0].currentBlockState == BlockState.X)
             {
                 gameWon = true;
-                Debug.Log("Player won");
+                ShowWinOrLosePopUp();
             }
             else if (board[0, 0].currentBlockState == BlockState.O)
             {
                 gameLose = true;
-                Debug.Log("Opponent AI won");
+                ShowWinOrLosePopUp();
             }
         }
 
@@ -107,12 +111,12 @@ public class WinCondition : MonoBehaviour
             if (board[0, 2].currentBlockState == BlockState.X)
             {
                 gameWon = true;
-                Debug.Log("Player won");
+                ShowWinOrLosePopUp();
             }
             else if (board[0, 2].currentBlockState == BlockState.O)
             {
                 gameLose = true;
-                Debug.Log("Opponent AI won");
+                ShowWinOrLosePopUp();
             }
         }
     }
@@ -120,5 +124,36 @@ public class WinCondition : MonoBehaviour
     private bool CheckLine(GridBlock a, GridBlock b, GridBlock c)
     {
         return a.currentBlockState != BlockState.Empty && a.currentBlockState == b.currentBlockState && b.currentBlockState == c.currentBlockState;
+    }
+
+    private void ShowWinOrLosePopUp()
+    {
+        if (gameWon)
+        {
+            Debug.Log("Game Won");
+            StopPlayerAndOpponentAIMovesAfterWinOrLose();
+
+            AudioManager.Instance.PlayWinSound(0.4f);
+            Instantiate(xWonPopUp, xWonPopUp.transform.position, Quaternion.identity);
+        }
+        else if (gameLose)
+        {
+            Debug.Log("Game Lose");
+            StopPlayerAndOpponentAIMovesAfterWinOrLose();
+
+            AudioManager.Instance.PlayLoseSound(0.4f);
+            Instantiate(oWonPopUp, oWonPopUp.transform.position, Quaternion.identity);
+        }
+    }
+
+    private void StopPlayerAndOpponentAIMovesAfterWinOrLose()
+    {
+        if (gameWon || gameLose)
+        {
+            foreach (GridBlock gridBlock in blockList)
+                gridBlock.gameObject.SetActive(false);
+
+            advancedOpponentAI.gameObject.SetActive(false);
+        }
     }
 }

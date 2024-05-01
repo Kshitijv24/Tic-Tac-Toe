@@ -28,16 +28,13 @@ public class AdvancedOpponentAI : MonoBehaviour
 
     private void Update()
     {
-        //if (!isCoroutineRunning && !TurnManager.Instance.isPlayerTurn)
-        //{
-        //    StartCoroutine(OpponentAIMove());
-        //}
+        if (GridArea.Instance.gridBlockList.Count <= 0) return;
 
-        if (GridArea.Instance.gridBlockList.Count <= 0)
-            return;
+        if (!isCoroutineRunning && !TurnManager.Instance.isPlayerTurn)
+            StartCoroutine(OpponentAIMove());
 
-        if (!TurnManager.Instance.isPlayerTurn)
-            FindBestMove(board);
+        //if (!TurnManager.Instance.isPlayerTurn)
+        //    FindBestMove(board);
     }
 
     IEnumerator OpponentAIMove()
