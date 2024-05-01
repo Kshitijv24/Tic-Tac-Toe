@@ -388,6 +388,7 @@ GameObject:
   - component: {fileID: 261551141}
   - component: {fileID: 261551140}
   - component: {fileID: 261551142}
+  - component: {fileID: 261551143}
   m_Layer: 0
   m_Name: OpponentAI
   m_TagString: Untagged
@@ -440,16 +441,21 @@ MonoBehaviour:
   opponentAIIcon: {fileID: 2408435676056113886, guid: c93dce888c1186f47969dff143f25082, type: 3}
   opponentAIGameObjectHolder: {fileID: 1931624815}
   nextMoveWaitTime: 0.5
-  blockList:
-  - {fileID: 1617911307}
-  - {fileID: 173767771}
-  - {fileID: 473209714}
-  - {fileID: 1442920004}
-  - {fileID: 1257544433}
-  - {fileID: 1249786099}
-  - {fileID: 26455905}
-  - {fileID: 462835211}
-  - {fileID: 969192703}
+--- !u!114 &261551143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261551139}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6742eb224555bc54b9dd478d242db60e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  opponentAIIcon: {fileID: 2408435676056113886, guid: c93dce888c1186f47969dff143f25082, type: 3}
+  opponentAIGameObjectHolder: {fileID: 1931624815}
+  nextMoveWaitTime: 0.5
 --- !u!1 &277111451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1491,6 +1497,7 @@ GameObject:
   m_Component:
   - component: {fileID: 991082044}
   - component: {fileID: 991082043}
+  - component: {fileID: 991082045}
   m_Layer: 0
   m_Name: WinCondition
   m_TagString: Untagged
@@ -1537,6 +1544,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &991082045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991082042}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c574b89f9dd17a440ba5fb12249ab509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridBlockList:
+  - {fileID: 1617911307}
+  - {fileID: 173767771}
+  - {fileID: 473209714}
+  - {fileID: 1442920004}
+  - {fileID: 1257544433}
+  - {fileID: 1249786099}
+  - {fileID: 26455905}
+  - {fileID: 462835211}
+  - {fileID: 969192703}
+  gameWon: 0
+  gameLose: 0
 --- !u!1 &1249786094
 GameObject:
   m_ObjectHideFlags: 0

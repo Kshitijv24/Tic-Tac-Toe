@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AdvancedOpponentAI : MonoBehaviour
@@ -8,9 +7,9 @@ public class AdvancedOpponentAI : MonoBehaviour
     [SerializeField] GameObject opponentAIIcon;
     [SerializeField] GameObject opponentAIGameObjectHolder;
     [SerializeField] float nextMoveWaitTime = 0.5f;
-
-    bool isCoroutineRunning = false;
+    
     GridBlock[,] board = new GridBlock[3, 3];
+    bool isCoroutineRunning = false;
     int index = 0;
 
     private void Start()
@@ -29,10 +28,16 @@ public class AdvancedOpponentAI : MonoBehaviour
 
     private void Update()
     {
-        if (!isCoroutineRunning && !TurnManager.Instance.isPlayerTurn)
-        {
-            StartCoroutine(OpponentAIMove());
-        }
+        //if (!isCoroutineRunning && !TurnManager.Instance.isPlayerTurn)
+        //{
+        //    StartCoroutine(OpponentAIMove());
+        //}
+
+        if (GridArea.Instance.gridBlockList.Count <= 0)
+            return;
+
+        if (!TurnManager.Instance.isPlayerTurn)
+            FindBestMove(board);
     }
 
     IEnumerator OpponentAIMove()
@@ -47,16 +52,17 @@ public class AdvancedOpponentAI : MonoBehaviour
 
         yield return new WaitForSeconds(nextMoveWaitTime);
 
-        FindBestMove();
+        FindBestMove(board);
         AudioManager.Instance.PlayClickSound(1f);
 
         isCoroutineRunning = false;
     }
 
-    private void FindBestMove()
+    private void FindBestMove(GridBlock[,] board)
     {
         int bestScore = int.MinValue;
-        GridBlock move = null;
+        int bestMoveRow = -1;
+        int bestMoveCol = -1;
 
         for (int i = 0; i < 3; i++)
         {
@@ -67,29 +73,42 @@ public class AdvancedOpponentAI : MonoBehaviour
                     board[i, j].currentBlockState = BlockState.X;
                     int score = MiniMax(board, 0, false);
                     board[i, j].currentBlockState = BlockState.Empty;
+                    //Debug.Log("Checking move at [" + i + ", " + j + "] with score: " + score);
 
                     if (score > bestScore)
                     {
                         bestScore = score;
-                        move = board[i, j];
+                        bestMoveRow = i;
+                        bestMoveCol = j;
                     }
                 }
             }
         }
 
-        Instantiate(
-            opponentAIIcon,
-            move.transform.position,
-            Quaternion.identity, opponentAIGameObjectHolder.transform);
+        if (bestMoveRow != -1 && bestMoveCol != -1)
+        {
+            GridBlock move = board[bestMoveRow, bestMoveCol];
+            Debug.Log("Best Move Found: [" + bestMoveRow + ", " + bestMoveCol + "] with score: " + bestScore);
 
-        move.currentBlockState = BlockState.O;
-        GridArea.Instance.gridBlockList.Remove(move);
-        TurnManager.Instance.ChangeTurn();
+            Instantiate(
+                opponentAIIcon,
+                move.transform.position,
+                Quaternion.identity, opponentAIGameObjectHolder.transform);
+
+            move.currentBlockState = BlockState.O;
+            GridArea.Instance.gridBlockList.Remove(move);
+            TurnManager.Instance.ChangeTurn();
+        }
+        else
+        {
+            Debug.LogError("No valid move found!");
+        }
     }
+
 
     private int MiniMax(GridBlock[,] board, int depth, bool isMaximizing)
     {
-        int score = WinCondition.Instance.HandleWinAndLoseCondition(board);
+        int score = Evaluation(board);
 
         if (score == 10)
             return score;
@@ -97,7 +116,7 @@ public class AdvancedOpponentAI : MonoBehaviour
         if (score == -10)
             return score;
 
-        if (!isMovesLeft(board))
+        if (!IsMovesLeft(board))
             return 0;
 
         if (isMaximizing)
@@ -113,7 +132,7 @@ public class AdvancedOpponentAI : MonoBehaviour
                         board[i,j].currentBlockState = BlockState.X;
                         score = MiniMax(board, depth + 1, !isMaximizing);
                         board[i, j].currentBlockState = BlockState.Empty;
-                        bestScore = (int)MathF.Max(score, bestScore);
+                        bestScore = Math.Max(score, bestScore);
                     }
                 }
             }
@@ -132,7 +151,7 @@ public class AdvancedOpponentAI : MonoBehaviour
                         board[i, j].currentBlockState = BlockState.O;
                         score = MiniMax(board, depth + 1, isMaximizing);
                         board[i, j].currentBlockState = BlockState.Empty;
-                        bestScore = (int)MathF.Min(score, bestScore);
+                        bestScore = Math.Min(score, bestScore);
                     }
                 }
             }
@@ -140,7 +159,58 @@ public class AdvancedOpponentAI : MonoBehaviour
         }
     }
 
-    private Boolean isMovesLeft(GridBlock[,] board)
+    private int Evaluation(GridBlock[,] board)
+    {
+        // Check for horizontal win/lose conditions
+        for (int row = 0; row < 3; row++)
+        {
+            if (CheckLine(board[row, 0], board[row, 1], board[row, 2]))
+            {
+                if (board[row, 0].currentBlockState == BlockState.X)
+                    return 10;
+                else if (board[row, 0].currentBlockState == BlockState.O)
+                    return -10;
+            }
+        }
+
+        // Check for vertical win/lose conditions
+
+        for (int col = 0; col < 3; col++)
+        {
+            if (CheckLine(board[0, col], board[1, col], board[2, col]))
+            {
+                if (board[0, col].currentBlockState == BlockState.X)
+                    return 10;
+                else if (board[0, col].currentBlockState == BlockState.O)
+                    return -10;
+            }
+        }
+
+        // Check for diagonal win/lose conditions
+        if (CheckLine(board[0, 0], board[1, 1], board[2, 2]))
+        {
+            if (board[0, 0].currentBlockState == BlockState.X)
+                return 10;
+            else if (board[0, 0].currentBlockState == BlockState.O)
+                return -10;
+        }
+
+        if (CheckLine(board[0, 2], board[1, 1], board[2, 0]))
+        {
+            if (board[0, 2].currentBlockState == BlockState.X)
+                return 10;
+            else if (board[0, 2].currentBlockState == BlockState.O)
+                return -10;
+        }
+        return 0;
+    }
+
+    private bool CheckLine(GridBlock a, GridBlock b, GridBlock c)
+    {
+        return a.currentBlockState != BlockState.Empty && a.currentBlockState == b.currentBlockState && b.currentBlockState == c.currentBlockState;
+    }
+
+    private Boolean IsMovesLeft(GridBlock[,] board)
     {
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)
