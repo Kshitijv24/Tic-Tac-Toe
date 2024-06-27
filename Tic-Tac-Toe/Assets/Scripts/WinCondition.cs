@@ -12,6 +12,12 @@ public class WinCondition : MonoBehaviour
     [SerializeField] GameObject oWonPopUp;
     [SerializeField] AdvancedOpponentAI advancedOpponentAI;
 
+    [SerializeField] GameObject VerticalWinLine;
+    [SerializeField] GameObject HorizontalWinLine;
+    [SerializeField] GameObject LeftToRightDiagonalWinLine;
+    [SerializeField] GameObject RightToLeftDiagonalWinLine;
+
+
     [HideInInspector] public bool gameWon = false;
     [HideInInspector] public bool gameLose = false;
     [HideInInspector] public GridBlock[,] board = new GridBlock[3, 3];
@@ -62,11 +68,13 @@ public class WinCondition : MonoBehaviour
                 if (board[row, 0].currentBlockState == BlockState.X)
                 {
                     gameWon = true;
+                    ShowWinLine(HorizontalWinLine, row, 1);
                     ShowWinOrLosePopUp();
                 }
                 else if (board[row, 0].currentBlockState == BlockState.O)
                 {
                     gameLose = true;
+                    ShowWinLine(HorizontalWinLine, row, 1);
                     ShowWinOrLosePopUp();
                 }
             }
@@ -81,11 +89,13 @@ public class WinCondition : MonoBehaviour
                 if (board[0, col].currentBlockState == BlockState.X)
                 {
                     gameWon = true;
+                    ShowWinLine(VerticalWinLine, 1, col);
                     ShowWinOrLosePopUp();
                 }
                 else if (board[0, col].currentBlockState == BlockState.O)
                 {
                     gameLose = true;
+                    ShowWinLine(VerticalWinLine, 1, col);
                     ShowWinOrLosePopUp();
                 }
             }
@@ -97,11 +107,13 @@ public class WinCondition : MonoBehaviour
             if (board[0, 0].currentBlockState == BlockState.X)
             {
                 gameWon = true;
+                ShowWinLine(LeftToRightDiagonalWinLine, 1, 1);
                 ShowWinOrLosePopUp();
             }
             else if (board[0, 0].currentBlockState == BlockState.O)
             {
                 gameLose = true;
+                ShowWinLine(LeftToRightDiagonalWinLine, 1, 1);
                 ShowWinOrLosePopUp();
             }
         }
@@ -111,14 +123,21 @@ public class WinCondition : MonoBehaviour
             if (board[0, 2].currentBlockState == BlockState.X)
             {
                 gameWon = true;
+                ShowWinLine(RightToLeftDiagonalWinLine, 1, 1);
                 ShowWinOrLosePopUp();
             }
             else if (board[0, 2].currentBlockState == BlockState.O)
             {
                 gameLose = true;
+                ShowWinLine(RightToLeftDiagonalWinLine, 1, 1);
                 ShowWinOrLosePopUp();
             }
         }
+    }
+
+    private void ShowWinLine(GameObject prefab, int row, int col)
+    {
+        Instantiate(prefab, board[row, col].transform.position, prefab.transform.rotation);
     }
 
     private bool CheckLine(GridBlock a, GridBlock b, GridBlock c)

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpponentAI : MonoBehaviour
+public class RandomOpponentAI : MonoBehaviour
 {
     [SerializeField] GameObject opponentAIIcon;
     [SerializeField] GameObject opponentAIGameObjectHolder;
@@ -13,9 +13,7 @@ public class OpponentAI : MonoBehaviour
     private void Update()
     {
         if (!isCoroutineRunning && !TurnManager.Instance.isPlayerTurn)
-        {
             StartCoroutine(OpponentAIMove());
-        }
     }
 
     IEnumerator OpponentAIMove()

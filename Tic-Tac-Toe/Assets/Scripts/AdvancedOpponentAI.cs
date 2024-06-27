@@ -204,7 +204,9 @@ public class AdvancedOpponentAI : MonoBehaviour
 
     private bool CheckLine(GridBlock a, GridBlock b, GridBlock c)
     {
-        return a.currentBlockState != BlockState.Empty && a.currentBlockState == b.currentBlockState && b.currentBlockState == c.currentBlockState;
+        return a.currentBlockState != BlockState.Empty 
+            && a.currentBlockState == b.currentBlockState 
+            && b.currentBlockState == c.currentBlockState;
     }
 
     private Boolean IsMovesLeft(GridBlock[,] board)
